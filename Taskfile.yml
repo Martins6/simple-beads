@@ -1,0 +1,98 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  build:
+    desc: Build sb binary to build/sb
+    cmds:
+      - mkdir -p build
+      - go build -o build/sb .
+    sources:
+      - "**/*.go"
+      - go.mod
+      - go.sum
+    generates:
+      - build/sb
+
+  install:
+    desc: Install to $GOPATH/bin using go install
+    cmds:
+      - go install .
+
+  install-local:
+    desc: Build and install binary to ~/.local/bin (no sudo required)
+    deps: [build]
+    cmds:
+      - |
+        if [ -d "$HOME/.local/bin" ] || mkdir -p "$HOME/.local/bin" 2>/dev/null; then
+          INSTALL_DIR="$HOME/.local/bin"
+        elif [ -w /usr/local/bin ]; then
+          INSTALL_DIR="/usr/local/bin"
+        else
+          echo "Error: Could not find or create a writable installation directory."
+          echo "Please ensure $HOME/.local/bin exists and is writable."
+          echo "Or run: mkdir -p ~/.local/bin"
+          exit 1
+        fi
+        
+        cp build/sb "$INSTALL_DIR/sb"
+        chmod +x "$INSTALL_DIR/sb"
+        
+        echo "✓ sb installed to $INSTALL_DIR/sb"
+        if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
+          echo ""
+          echo "Add $INSTALL_DIR to your PATH:"
+          echo "  export PATH=\"$PATH:$INSTALL_DIR\""
+          echo ""
+          echo "Add this to your ~/.bashrc or ~/.zshrc to make it permanent."
+        fi
+
+  clean:
+    desc: Remove build directory
+    cmds:
+      - rm -rf build
+
+  run:
+    desc: Build and execute for testing
+    cmds:
+      - task: build
+      - ./build/sb --help
+
+  deps:
+    desc: Download and tidy dependencies
+    cmds:
+      - go mod download
+      - go mod tidy
+
+  test:
+    desc: Run all tests
+    cmds:
+      - go test -v ./...
+
+  test-coverage:
+    desc: Run tests with coverage report
+    cmds:
+      - go test -cover ./...
+
+  fmt:
+    desc: Format Go code
+    cmds:
+      - go fmt ./...
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet ./...
+
+  check:
+    desc: Run all checks (fmt, vet, test)
+    cmds:
+      - task: fmt
+      - task: vet
+      - task: test
+
+  default:
+    desc: List all tasks
+    cmds:
+      - task --list
