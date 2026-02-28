@@ -1,6 +1,6 @@
 # Simple Beads (sb)
 
-A lightweight, local-only task management CLI inspired by [beads](https://github.com/anomalyco/beads). Store tasks in SQLite with support for parent-child relationships, dependencies, and priorities.
+A lightweight, local-only task management CLI inspired by [beads](https://github.com/steveyegge/beads). Store tasks in SQLite with support for parent-child relationships, dependencies, and priorities.
 
 ## Features
 
@@ -55,6 +55,7 @@ go install github.com/Martins6/simple-beads@latest
 ```
 
 **Note:** Make sure `$GOPATH/bin` or `$HOME/go/bin` is in your PATH. Add to your `.bashrc` or `.zshrc`:
+
 ```bash
 export PATH="$PATH:$(go env GOPATH)/bin"
 ```
@@ -91,29 +92,29 @@ sb close sb-abc
 
 ### Core Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `sb init` | Initialize sbeads in current directory | `sb init` |
-| `sb create` | Create a new task | `sb create "Title" -d "Desc" -p 1` |
-| `sb list` | List tasks with filters | `sb list --all -p 0` |
-| `sb show` | Show task details | `sb show sb-abc` |
-| `sb update` | Update task fields | `sb update sb-abc --title "New"` |
-| `sb close` | Mark task(s) as closed | `sb close sb-abc sb-123` |
-| `sb delete` | Delete task(s) permanently | `sb delete sb-abc` |
+| Command     | Description                            | Example                            |
+| ----------- | -------------------------------------- | ---------------------------------- |
+| `sb init`   | Initialize sbeads in current directory | `sb init`                          |
+| `sb create` | Create a new task                      | `sb create "Title" -d "Desc" -p 1` |
+| `sb list`   | List tasks with filters                | `sb list --all -p 0`               |
+| `sb show`   | Show task details                      | `sb show sb-abc`                   |
+| `sb update` | Update task fields                     | `sb update sb-abc --title "New"`   |
+| `sb close`  | Mark task(s) as closed                 | `sb close sb-abc sb-123`           |
+| `sb delete` | Delete task(s) permanently             | `sb delete sb-abc`                 |
 
 ### Workflow Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `sb ready` | Show tasks ready to work on | `sb ready` |
-| `sb blocked` | Show blocked tasks | `sb blocked` |
+| Command      | Description                 | Example      |
+| ------------ | --------------------------- | ------------ |
+| `sb ready`   | Show tasks ready to work on | `sb ready`   |
+| `sb blocked` | Show blocked tasks          | `sb blocked` |
 
 ### Dependency Commands
 
-| Command | Description | Example |
-|---------|-------------|---------|
-| `sb dep add` | Add dependency to task | `sb dep add sb-abc sb-123` |
-| `sb dep remove` | Remove dependency | `sb dep remove sb-abc sb-123` |
+| Command         | Description            | Example                       |
+| --------------- | ---------------------- | ----------------------------- |
+| `sb dep add`    | Add dependency to task | `sb dep add sb-abc sb-123`    |
+| `sb dep remove` | Remove dependency      | `sb dep remove sb-abc sb-123` |
 
 ## Command Flags
 
@@ -246,6 +247,7 @@ CREATE TABLE dependencies (
 ```
 
 ### Benefits of SQLite:
+
 - **ACID transactions**: Atomic operations guarantee data consistency
 - **Multi-process safe**: Uses WAL (Write-Ahead Logging) mode for concurrent access
 - **No data corruption**: File-level locking prevents race conditions
@@ -291,6 +293,7 @@ mkdir -p ~/.local/bin && cp sb ~/.local/bin/  # Or user-local install
 ```
 
 **Optional:** The project includes a Taskfile.yml for those who prefer using [Task](https://taskfile.dev):
+
 ```bash
 # If you have Task installed
 task build         # Build binary
@@ -331,13 +334,13 @@ sbeads/
 
 ## Comparison with beads
 
-| Feature | sb (Simple Beads) | beads |
-|---------|-------------------|-------|
-| Storage | SQLite (WAL mode) | SQLite + JSONL |
-| Sync | Manual (git) | Automatic git sync |
-| Complexity | Simple | Full-featured |
-| Setup | Single binary | Requires setup |
-| Best for | Personal projects | Team workflows |
+| Feature    | sb (Simple Beads) | beads              |
+| ---------- | ----------------- | ------------------ |
+| Storage    | SQLite (WAL mode) | SQLite + JSONL     |
+| Sync       | Manual (git)      | Automatic git sync |
+| Complexity | Simple            | Full-featured      |
+| Setup      | Single binary     | Requires setup     |
+| Best for   | Personal projects | Team workflows     |
 
 sb is designed for simplicity - it's beads without the complexity of sync, web UI, and advanced features.
 
