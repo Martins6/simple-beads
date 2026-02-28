@@ -21,7 +21,7 @@ A lightweight, local-only task management CLI inspired by [beads](https://github
 
 ```bash
 # Using curl (recommended)
-curl -fsSL https://raw.githubusercontent.com/user/sbeads/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Martins6/simple-beads/main/install.sh | bash
 
 # Or clone and install
 git clone https://github.com/Martins6/simple-beads.git

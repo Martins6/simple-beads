@@ -12,7 +12,7 @@ sbeads (Simple Beads) is a lightweight, local-only task management CLI that stor
 
 ```bash
 # Using curl (recommended)
-curl -fsSL https://raw.githubusercontent.com/user/sbeads/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Martins6/simple-beads/main/install.sh | bash
 
 # Or clone and install manually
 git clone https://github.com/Martins6/simple-beads.git
