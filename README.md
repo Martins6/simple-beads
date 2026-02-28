@@ -24,7 +24,7 @@ A lightweight, local-only task management CLI inspired by [beads](https://github
 curl -fsSL https://raw.githubusercontent.com/user/sbeads/main/install.sh | bash
 
 # Or clone and install
-git clone https://github.com/user/sbeads.git
+git clone https://github.com/Martins6/simple-beads.git
 cd sbeads
 ./install.sh              # Install to /usr/local/bin
 ./install.sh --local      # Or install to ~/.local/bin (no sudo)
@@ -34,7 +34,7 @@ cd sbeads
 
 ```bash
 # Clone the repository
-git clone https://github.com/user/sbeads.git
+git clone https://github.com/Martins6/simple-beads.git
 cd sbeads
 
 # Build
@@ -51,7 +51,7 @@ cp sb /usr/local/bin/
 ### Using Go
 
 ```bash
-go install github.com/user/sbeads@latest
+go install github.com/Martins6/simple-beads@latest
 ```
 
 **Note:** Make sure `$GOPATH/bin` or `$HOME/go/bin` is in your PATH. Add to your `.bashrc` or `.zshrc`:

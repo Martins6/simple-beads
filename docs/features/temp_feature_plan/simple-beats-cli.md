@@ -40,7 +40,7 @@ Set up Go module and install Cobra CLI tools
 
 Commands:
 ```bash
-go mod init github.com/user/sbeads
+go mod init github.com/Martins6/simple-beads
 go get github.com/spf13/cobra@latest
 go install github.com/spf13/cobra-cli@latest
 cobra-cli init

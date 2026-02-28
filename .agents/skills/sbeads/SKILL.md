@@ -15,7 +15,7 @@ sbeads (Simple Beads) is a lightweight, local-only task management CLI that stor
 curl -fsSL https://raw.githubusercontent.com/user/sbeads/main/install.sh | bash
 
 # Or clone and install manually
-git clone https://github.com/user/sbeads.git
+git clone https://github.com/Martins6/simple-beads.git
 cd sbeads
 ./install.sh              # Install to ~/.local/bin (no sudo)
 ```
@@ -28,7 +28,7 @@ The install script will:
 ### Using Go
 
 ```bash
-go install github.com/user/sbeads@latest
+go install github.com/Martins6/simple-beads@latest
 ```
 
 Make sure `$GOPATH/bin` is in your PATH:

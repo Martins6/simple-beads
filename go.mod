@@ -1,4 +1,4 @@
-module github.com/user/sbeads
+module github.com/Martins6/simple-beads
 
 go 1.25.2
 

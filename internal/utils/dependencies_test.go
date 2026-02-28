@@ -3,7 +3,7 @@ package utils
 import (
 	"testing"
 
-	"github.com/user/sbeads/internal/models"
+	"github.com/Martins6/simple-beads/internal/models"
 )
 
 func TestNewDependencyChecker(t *testing.T) {

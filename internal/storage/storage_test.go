@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/user/sbeads/internal/models"
+	"github.com/Martins6/simple-beads/internal/models"
 )
 
 func setupTestStorage(t *testing.T) (*Storage, func()) {

@@ -6,8 +6,8 @@ package cmd
 import (
 	"os"
 
+	"github.com/Martins6/simple-beads/internal/storage"
 	"github.com/spf13/cobra"
-	"github.com/user/sbeads/internal/storage"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -16,7 +16,8 @@ var rootCmd = &cobra.Command{
 	Short: "Simple Beads - A lightweight task management CLI",
 	Long: `Simple Beads (sb) is a lightweight, local-only task management CLI.
 
-Store tasks in JSON Lines format (.sbeads/tasks.jsonl), with support for:
+Store tasks in SQLite database (.sbeads/tasks.db), with support for:
+- Multi-agent concurrent access (ACID transactions)
 - Parent-child task relationships
 - Dependencies between tasks
 - Priority levels (0-4, where 0 is highest)

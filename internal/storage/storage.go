@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 
 	_ "github.com/mattn/go-sqlite3"
-	"github.com/user/sbeads/internal/models"
+	"github.com/Martins6/simple-beads/internal/models"
 )
 
 const (

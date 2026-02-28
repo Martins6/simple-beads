@@ -43,7 +43,7 @@ esac
 LOCAL_DIR="$HOME/.local/bin"
 GO_BIN="$(go env GOPATH 2>/dev/null)/bin" || "$HOME/go/bin"
 BINARY_NAME="sb"
-REPO_URL="https://github.com/user/sbeads"
+REPO_URL="https://github.com/Martins6/simple-beads"
 
 # Determine install location
 get_install_dir() {
