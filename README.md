@@ -131,6 +131,11 @@ sb close sb-abc
 - `-p, --priority`: Filter by priority (0-4)
 - `--status`: Filter by status (open, closed)
 - `--parent`: Filter by parent task ID
+- `--on YYYY-MM-DD`: Filter by exact date (closed tasks match on `closed_at`, open tasks on `created_at`)
+- `--after YYYY-MM-DD`: Filter by date >= value (inclusive, local time)
+- `--before YYYY-MM-DD`: Filter by date <= value (inclusive, local time)
+
+`--on` cannot be combined with `--after` or `--before`. Dates are interpreted in local time.
 
 ### `sb update`
 
