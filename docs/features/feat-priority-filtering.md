@@ -1,13 +1,14 @@
 # Overview
 
-Priority levels and status filtering for organizing and finding tasks.
+Priority levels, status filtering, and date filtering for organizing and finding tasks.
 
 # Details
 
 - Priority levels 0-4 where 0 is highest priority
 - Default priority is P2 (medium)
 - Status states: open, closed
-- List command filters: --all, --status, --priority, --parent
+- List command filters: --all, --status, --priority, --parent, --on, --after, --before
+- Date filters (--on, --after, --before) are documented in feat-date-filtering.md
 - Ready command shows open tasks not blocked by dependencies
 - Blocked command shows open tasks with unclosed dependencies
 - Sorting by priority (ascending) then creation date
