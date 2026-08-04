@@ -44,3 +44,4 @@ sbeads/
 - feat-cli-commands.md - CLI interface using Cobra framework
 - feat-task-relationships.md - Parent-child hierarchies and dependency management
 - feat-priority-filtering.md - Priority levels and status filtering
+- feat-date-filtering.md - Date filtering for `sb list` with --on/--after/--before flags

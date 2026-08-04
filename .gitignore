@@ -32,6 +32,9 @@ dist/
 .beads/
 .agents/
 
+# Transient plan workspace (created by create-implementation-plan skill)
+docs/features/temp_feature_plan/
+
 # IDE specific files
 .idea/
 .vscode/
