@@ -96,62 +96,75 @@ main() {
         exit 1
     fi
 
-    # Check if we're in source directory
-    if [ -f "go.mod" ] && [ -d "cmd" ]; then
-        print_info "Building from source..."
-        
-        # Check for Go
+    # Path of the built binary, set by build_from_source
+    BUILT_PATH=""
+
+    # Build the binary from a local source directory.
+    # Sets BUILT_PATH to the resulting binary on success.
+    build_from_source() {
+        local src_dir="$1"
         if ! command -v go &> /dev/null; then
             print_error "Go is not installed"
             print_info "Install Go from: https://golang.org/doc/install"
             exit 1
         fi
-        
-        # Build
-        go build -o "$BINARY_NAME" .
+        (cd "$src_dir" && go build -o "$BINARY_NAME" .) || {
+            print_error "Build failed"
+            exit 1
+        }
+        BUILT_PATH="$src_dir/$BINARY_NAME"
+    }
+
+    # Detect mode: local source clone vs remote curl|bash invocation
+    if [ -f "go.mod" ] && [ -d "cmd" ]; then
+        # Local mode: ./install.sh run from inside a cloned repo
+        print_info "Building from local source..."
+        build_from_source "."
         print_success "Built $BINARY_NAME"
     else
-        # Download pre-built binary
-        print_info "Downloading pre-built binary..."
-        
-        OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-        BINARY_URL="$REPO_URL/releases/latest/download/sb-${OS}-${ARCH}"
-        
+        # Remote mode: curl|bash with no local source
+        print_info "Downloading source tarball..."
+        TARBALL_URL="$REPO_URL/archive/refs/heads/main.tar.gz"
+        WORK_DIR=$(mktemp -d)
+        trap 'rm -rf "$WORK_DIR"' EXIT
+
+        TARBALL="$WORK_DIR/source.tar.gz"
+        SRC_DIR="$WORK_DIR/simple-beads-main"
+
         if command -v curl &> /dev/null; then
-            curl -fsSL "$BINARY_URL" -o "$BINARY_NAME" || {
-                print_error "Failed to download binary"
+            curl -fsSL "$TARBALL_URL" -o "$TARBALL" || {
+                print_error "Failed to download source tarball from $TARBALL_URL"
                 print_info "You can build from source instead:"
                 print_cmd "  git clone $REPO_URL"
-                print_cmd "  cd sbeads"
-                print_cmd "  go build -o sb ."
+                print_cmd "  cd simple-beads"
+                print_cmd "  ./install.sh"
                 exit 1
             }
         elif command -v wget &> /dev/null; then
-            wget -q "$BINARY_URL" -O "$BINARY_NAME" || {
-                print_error "Failed to download binary"
+            wget -q "$TARBALL_URL" -O "$TARBALL" || {
+                print_error "Failed to download source tarball from $TARBALL_URL"
                 print_info "You can build from source instead:"
                 print_cmd "  git clone $REPO_URL"
-                print_cmd "  cd sbeads"
-                print_cmd "  go build -o sb ."
+                print_cmd "  cd simple-beads"
+                print_cmd "  ./install.sh"
                 exit 1
             }
         else
             print_error "Need curl or wget to download"
             exit 1
         fi
-        
-        chmod +x "$BINARY_NAME"
-        print_success "Downloaded $BINARY_NAME"
+
+        tar -xzf "$TARBALL" -C "$WORK_DIR"
+        print_info "Building from downloaded source..."
+        build_from_source "$SRC_DIR"
+        print_success "Built $BINARY_NAME"
     fi
 
     # Install
     print_info "Installing to $TARGET_DIR..."
-    cp "$BINARY_NAME" "$TARGET_DIR/"
+    cp "$BUILT_PATH" "$TARGET_DIR/$BINARY_NAME"
     chmod +x "$TARGET_DIR/$BINARY_NAME"
     print_success "Installed to $TARGET_DIR/$BINARY_NAME"
-
-    # Cleanup
-    rm -f "$BINARY_NAME"
 
     # Verify
     if [ -x "$TARGET_DIR/$BINARY_NAME" ]; then

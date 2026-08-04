@@ -25,7 +25,7 @@ curl -fsSL https://raw.githubusercontent.com/Martins6/simple-beads/main/install.
 
 # Or clone and install
 git clone https://github.com/Martins6/simple-beads.git
-cd sbeads
+cd simple-beads
 ./install.sh              # Install to /usr/local/bin
 ./install.sh --local      # Or install to ~/.local/bin (no sudo)
 ```
@@ -35,7 +35,7 @@ cd sbeads
 ```bash
 # Clone the repository
 git clone https://github.com/Martins6/simple-beads.git
-cd sbeads
+cd simple-beads
 
 # Build
 go build -o sb .

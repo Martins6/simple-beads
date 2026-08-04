@@ -1,1 +1,1 @@
-
+2026-08-03-21-53 | Fixed install.sh 404: remote (curl|bash) path now downloads the source tarball from main and builds it locally instead of attempting to download non-existent release binaries. Added `.github/workflows/release.yml` to cross-compile and attach binaries to GitHub Releases on `v*` tag push so the binary download path becomes viable once the first release is cut. Fixed `cd sbeads` → `cd simple-beads` typo in install.sh fallback messages and README.md clone instructions.
