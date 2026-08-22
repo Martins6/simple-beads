@@ -16,7 +16,7 @@ curl -fsSL https://raw.githubusercontent.com/Martins6/simple-beads/main/install.
 
 # Or clone and install manually
 git clone https://github.com/Martins6/simple-beads.git
-cd sbeads
+cd simple-beads
 ./install.sh              # Install to ~/.local/bin (no sudo)
 ```
 
