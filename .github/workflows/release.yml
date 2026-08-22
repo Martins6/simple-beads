@@ -5,9 +5,6 @@ on:
     tags:
       - 'v*'
 
-permissions:
-  contents: write
-
 jobs:
   build:
     name: Build sb (${{ matrix.goos }}/${{ matrix.goarch }})
@@ -28,7 +25,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version-file: go.mod
           cache: true
 
       - name: Build
@@ -43,7 +40,6 @@ jobs:
           chmod +x "$OUT"
 
       - name: Checksums
-        if: ${{ github.event_name == 'push' }}
         run: |
           (cd dist && sha256sum sb-* > checksums.txt)
 
@@ -58,6 +54,8 @@ jobs:
     name: Publish GitHub Release
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Download all build artifacts
         uses: actions/download-artifact@v4

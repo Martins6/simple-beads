@@ -166,6 +166,9 @@ main() {
     chmod +x "$TARGET_DIR/$BINARY_NAME"
     print_success "Installed to $TARGET_DIR/$BINARY_NAME"
 
+    # Cleanup
+    rm -f "$BUILT_PATH"
+
     # Verify
     if [ -x "$TARGET_DIR/$BINARY_NAME" ]; then
         print_success "Installation complete!"

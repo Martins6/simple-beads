@@ -280,7 +280,7 @@ type Task struct {
 
 ### Prerequisites
 
-- Go 1.21 or later
+- Go 1.25.2 or later
 - Task (optional, for builds): `go install github.com/go-task/task/v3/cmd/task@latest`
 
 ### Build
